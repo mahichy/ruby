@@ -35,13 +35,13 @@ class Movie
               @rank -=1
            end
 
-           def listing
+           def to_s
                "#{@title} has a rank #{@rank}"
            end
    end
    movie1 = Movie.new("goonies",99)
    movie1.thums_up
-   puts movie1.listing
+   puts movie1
    puts movie1.title
    puts movie1.rank
    puts movie1.title
