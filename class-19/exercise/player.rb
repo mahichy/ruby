@@ -36,13 +36,13 @@ class Player
   def found_treasure(treasure)
     @found_treasures[treasure.name] += treasure.points
     puts "#{@name} found a #{treasure.name} worth #{treasure.points} points."
-    puts "#{@name}'s treasures: #{@found_treasures}"
   end
-
+  
   def each_found_treasure
     @found_treasures.each do |name, points|
-      yield Treasure.new(name,points)
-      end 
+      next_treasure = Treasure.new(name, points)
+      yield next_treasure
+    end
   end
   
   def <=>(other)
@@ -51,6 +51,11 @@ class Player
   
   def to_s
     "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
+  end
+  
+  def self.from_csv(string)
+    name, health = string.split(',')    
+    new(name, Integer(health))
   end
   
 end
