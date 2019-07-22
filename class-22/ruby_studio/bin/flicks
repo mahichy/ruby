@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/flicks/playlist'
+
+
+playlist1 = Flicks::Playlist.new("Kermit")
+default_movie_file = 
+File.join(File.dirname(__FILE__),'movies.csv')
+playlist1.load(ARGV.shift || default_movie_file)
+
+
+
+loop do
+    puts "\nHow many viewings? ('quit' to exit)"
+    answer = gets.chomp.downcase
+    case answer
+    when /^\d+$/
+        playlist1.play(answer.to_i)
+    when 'quit','exit'
+        playlist1.print_stats
+        break
+    else
+        puts "Please enter a number or 'exit'"
+    end  
+end
+playlist1.save
+
+
+
+
+
+
